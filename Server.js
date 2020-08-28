@@ -10,8 +10,7 @@ require("dotenv").config();
 app.use(cors());
 app.use(bodyParser.json());
 
-const uri =
-  "mongodb+srv://dbShuhin:TDTY86Wn4CBLgi3s@cluster0-kw21o.mongodb.net/Doctors_Portal?retryWrites=true&w=majority";
+const uri = process.env.DB_CONNECTION;
 let client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
