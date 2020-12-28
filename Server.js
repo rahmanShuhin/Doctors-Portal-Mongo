@@ -63,17 +63,8 @@ const validation = (data) => {
   console.log(data);
   return schema.validate(data);
 };
+
 app.post("/addAppointment", async (req, res) => {
-  const tata = {
-    email: req.body.email,
-    phone: req.body.phone,
-  };
-  console.log(tata);
-  const { error } = validation(tata);
-  if (error) {
-    console.log(error.details[0].message);
-    return res.status(400).send({ err: error.details[0].message });
-  }
   const data_app = req.body;
   client = new MongoClient(uri, {
     useNewUrlParser: true,
@@ -87,12 +78,13 @@ app.post("/addAppointment", async (req, res) => {
         res.status(500).send({ message: err });
         client.close();
       } else {
-        res.send(data_app);
+        res.send("success");
         client.close();
       }
     });
   });
 });
+
 //update data
 app.post("/updateStatus", (req, res) => {
   const id = req.body.id;
